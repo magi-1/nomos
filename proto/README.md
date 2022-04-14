@@ -2,7 +2,7 @@
 
 > prôtos: first
 
-<img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png" alt="ploom5" width="330"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom3.png" alt="ploom5" width="330"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom6_2.png" alt="ploom5" width="330"/> 
+<img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png" alt="ploom5" width="320"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom3.png" alt="ploom5" width="320"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom6_2.png" alt="ploom5" width="320"/> 
 
 
 # Ploom
