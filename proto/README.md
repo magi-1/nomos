@@ -12,15 +12,15 @@ A ```Ploom``` is defined by a collection of `circles` subject to random noise th
 
 ```rust
 struct Circle {
-    x: Vec2,
-    r: f32
+    x: Vec2, // coordinate
+    r: f32 // radius
 }
 
 struct Ploom {
     circles: Vec<Circle>,
-    focus: Vec2,
-    sigma : f32,
-    v: Vec2
+    focus: Vec2, // coordinate
+    sigma : f32, // variance of circles
+    v: Vec2 // velocity
 }
 ```
 
