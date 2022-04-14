@@ -2,6 +2,6 @@
 
 >  νόμος • (nómos) : law, rule, code
 
-Collection of generative art experiments
+A collection of generative art experiments using [nannou](https://nannou.cc/)
 
 
