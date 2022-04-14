@@ -1,7 +1,8 @@
 # proto
 
 > prôtos: first
-<img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png" alt="ploom5" width="200"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom3.png" alt="ploom5" width="200"/>
+
+<img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png" alt="ploom5" width="400"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom3.png" alt="ploom5" width="400"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom6_2.png" alt="ploom5" width="400"/> 
 
 # Ploom
 
