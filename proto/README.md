@@ -2,7 +2,7 @@
 
 > prôtos: first
 
-![ploom5.rs](https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png)
+![ploom5.rs](https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png) ![ploom5.rs](https://github.com/magi-1/nomos/blob/main/proto/images/ploom3.png) 
 
 # Ploom
 
