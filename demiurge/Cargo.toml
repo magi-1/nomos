@@ -1,0 +1,32 @@
+[package]
+name = "demiurge"
+version = "0.1.0"
+authors = ["magi-1"]
+description = "ploom = points(point) + N(mu,sigma*I)"
+edition = "2021"
+
+[dependencies]
+nannou = "0.18.0"
+rand = "0.6.5"
+
+[[example]]
+name = "ploom1"
+path = "ploom/ploom1.rs"
+[[example]]
+name = "ploom2"
+path = "ploom/ploom2.rs"
+[[example]]
+name = "ploom3"
+path = "ploom/ploom3.rs"
+[[example]]
+name = "ploom4"
+path = "ploom/ploom4.rs"
+[[example]]
+name = "ploom5"
+path = "ploom/ploom5.rs"
+[[example]]
+name = "ploom6"
+path = "ploom/ploom6.rs"
+[[example]]
+name = "ploom7"
+path = "ploom/ploom7.rs"
