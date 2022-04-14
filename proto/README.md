@@ -4,7 +4,7 @@
 
 ### Ploom
 
-A `ploom` is defined by a collection of `circles` subject to random noise that follow a `focus`. These circles/points are subject to gaussian noise `dx`and an attractive force towards the focus.
+A `ploom` is defined by a collection of `circles` subject to random noise that follow a `focus`. These circles/points are subject to gaussian noise `dx`and an attractive force towards the focus. By controling the location of the foci (which can be invisible), you inherently control the circles associated with it. Furthermore, it is possible to make these foci interact with eachother. There is a lot you can do with `Ploom`s. 
 
 
 ```rust
@@ -21,7 +21,7 @@ struct Ploom {
 }
 ```
 
-Note that tgere are additional features as the version of `ploom*.rs` increases such as edges drawn between foci within some maximum distance etc. 
+Note that there are additional features as the version of `ploom*.rs` increases such as edges drawn between foci within some maximum distance etc. 
 
 ```rust
 // nannou params
