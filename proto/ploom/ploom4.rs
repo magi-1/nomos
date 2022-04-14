@@ -167,7 +167,6 @@ fn draw_plumes(draw: &Draw, model: &Model, time: f32) {
     }
 }
 
-#[allow(dead_code)]
 fn draw_lines(draw: &Draw, model: &Model, time: f32) {
     for p1 in &model.plooms {
         for p2 in &model.plooms {

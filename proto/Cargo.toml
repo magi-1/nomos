@@ -1,5 +1,5 @@
 [package]
-name = "demiurge"
+name = "proto"
 version = "0.1.0"
 authors = ["magi-1"]
 description = "ploom = points(point) + N(mu,sigma*I)"
@@ -27,6 +27,3 @@ path = "ploom/ploom5.rs"
 [[example]]
 name = "ploom6"
 path = "ploom/ploom6.rs"
-[[example]]
-name = "ploom7"
-path = "ploom/ploom7.rs"
