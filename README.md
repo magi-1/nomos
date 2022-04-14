@@ -1,7 +1,5 @@
 # nomos
 
->  νόμος • (nómos) : law, rule, code
+> νόμος: law, rule, code
 
 A collection of generative art experiments using [nannou](https://nannou.cc/)
-
-
