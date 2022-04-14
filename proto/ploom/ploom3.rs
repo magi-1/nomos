@@ -2,8 +2,8 @@ use nannou::prelude::*;
 use rand::distributions::{Normal, Distribution};
 
 const WINDOW_SIZE: u32 = 1000;
-const NUM_PLOOMS: usize = 100;
-const NUM_CIRCLES: usize = 3;
+const NUM_PLOOMS: usize = 200;
+const NUM_CIRCLES: usize = 5;
 const MAX_RADIUS: f32 = 3.0;
 const SCALE: f32 = 100.0;
 
@@ -12,7 +12,7 @@ const THRESHOLD: f32 = 0.5; // min variance
 
 const PLOOM: f32 = SCALE/5.0; // or 4.0, or 10
 const DAMPENING: f32 = 0.01;
-const ALPHA: f32 = 0.03;
+const ALPHA: f32 = 0.02;
 
 fn main() {
     nannou::app(model).update(update).run();
@@ -102,6 +102,7 @@ fn model(app: &App) -> Model {
     app.new_window()
         .size(WINDOW_SIZE, WINDOW_SIZE)
         .view(view)
+        .key_released(key_released)
         .build()
         .unwrap();
 
@@ -143,4 +144,14 @@ fn view(app: &App, model: &Model, frame: Frame) {
         }
     }
     draw.to_frame(app, &frame).unwrap();
+}
+
+fn key_released(app: &App, _model: &mut Model, key: Key) {
+    match key {
+        Key::S => {
+            app.main_window()
+                .capture_frame(app.exe_name().unwrap() + ".png");
+        }
+        _other_key => {}
+    }
 }

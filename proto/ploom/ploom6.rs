@@ -108,6 +108,7 @@ fn model(app: &App) -> Model {
     app.new_window()
         .size(WINDOW_SIZE, WINDOW_SIZE)
         .view(view)
+        .key_released(key_released)
         .build()
         .unwrap();
 
@@ -193,5 +194,15 @@ fn draw_lines(draw: &Draw, model: &Model, time: f32) {
                     
             }
         }
+    }
+}
+
+fn key_released(app: &App, _model: &mut Model, key: Key) {
+    match key {
+        Key::S => {
+            app.main_window()
+                .capture_frame(app.exe_name().unwrap() + ".png");
+        }
+        _other_key => {}
     }
 }

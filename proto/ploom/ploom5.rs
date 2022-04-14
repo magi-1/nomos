@@ -6,10 +6,10 @@ const NUM_PLOOMS: usize = 150;
 const NUM_CIRCLES: usize = 2;
 const MAX_RADIUS: f32 = 3.0;
 const SCALE: f32 = 100.0;
-const DECAY: f32 = 0.98; // variance decay
-const THRESHOLD: f32 = 0.2; // min variance
-const PLOOM: f32 = SCALE/5.0; // or 4.0, or 10
-const DAMPENING: f32 = 0.02;
+const DECAY: f32 = 0.99; // variance decay
+const THRESHOLD: f32 = 0.3; // min variance
+const PLOOM: f32 = SCALE/2.0; // or 4.0, or 10
+const DAMPENING: f32 = 0.03;
 const ALPHA: f32 = 0.02;
 const MAX_DISTANCE: f32 = 100.0;
 
@@ -104,6 +104,7 @@ fn model(app: &App) -> Model {
     app.new_window()
         .size(WINDOW_SIZE, WINDOW_SIZE)
         .view(view)
+        .key_released(key_released)
         .build()
         .unwrap();
 
@@ -169,5 +170,15 @@ fn draw_lines(draw: &Draw, model: &Model, time: f32) {
                     .rgba(1.0,1.0,1.0, time/500.0);
             }
         }
+    }
+}
+
+fn key_released(app: &App, _model: &mut Model, key: Key) {
+    match key {
+        Key::S => {
+            app.main_window()
+                .capture_frame(app.exe_name().unwrap() + ".png");
+        }
+        _other_key => {}
     }
 }

@@ -37,6 +37,7 @@ fn model(app: &App) -> Model {
     app.new_window()
         .size(1000, 1000)
         .view(view)
+        .key_released(key_released)
         .build()
         .unwrap();
 
@@ -73,3 +74,12 @@ fn view(app: &App, model: &Model, frame: Frame) {
     draw.to_frame(app, &frame).unwrap();
 }
 
+fn key_released(app: &App, _model: &mut Model, key: Key) {
+    match key {
+        Key::S => {
+            app.main_window()
+                .capture_frame(app.exe_name().unwrap() + ".png");
+        }
+        _other_key => {}
+    }
+}

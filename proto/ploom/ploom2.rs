@@ -93,10 +93,14 @@ fn view(app: &App, model: &Model, frame: Frame) {
     draw.to_frame(app, &frame).unwrap();
 }
 
-fn key_released(_app: &App, model: &mut Model, key: Key) {
+fn key_released(app: &App, model: &mut Model, key: Key) {
     match key {
         Key::R => {
             model.focus = rand_vec2(0.0, SCALE)
+        }
+        Key::S => {
+            app.main_window()
+                .capture_frame(app.exe_name().unwrap() + ".png");
         }
         _other_key => {}
     }
