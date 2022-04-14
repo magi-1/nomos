@@ -2,6 +2,8 @@
 
 > prôtos: first
 
+![ploom5.rs](https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png)
+
 # Ploom
 
 A ```Ploom``` is defined by a collection of `circles` subject to random noise that follow a `focus`. These circles/points are subject to gaussian noise `dx`and an attractive force towards the focus. By controling the location of the foci (which can be invisible), you inherently control the circles associated with it. Furthermore, it is possible to make these foci interact with eachother. There is a lot you can do with a `Ploom`. 
