@@ -2,22 +2,25 @@
 
 > prôtos: first
 
+<img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom5_3.png" alt="ploom5" width="320"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom3.png" alt="ploom5" width="320"/> | <img src="https://github.com/magi-1/nomos/blob/main/proto/images/ploom6_2.png" alt="ploom5" width="320"/> 
+
+
 # Ploom
 
-A ```Ploom``` is defined by a collection of `circles` subject to random noise that follow a `focus`. These circles/points are subject to gaussian noise `dx`and an attractive force towards the focus. By controling the location of the foci (which can be invisible), you inherently control the circles associated with it. Furthermore, it is possible to make these foci interact with eachother. There is a lot you can do with a `Ploom`. 
+A ```Ploom``` is defined by a collection of `circles` that follow a `focus`. These circles/points are subject to gaussian noise `dx` and an attractive force towards the focus. By controling the location of the foci (which can be invisible), the circles must follow it via some random path since they are bound. 
 
 
 ```rust
 struct Circle {
-    x: Vec2,
-    r: f32
+    x: Vec2, // coordinate
+    r: f32 // radius
 }
 
 struct Ploom {
     circles: Vec<Circle>,
-    focus: Vec2,
-    sigma : f32,
-    v: Vec2
+    focus: Vec2, // coordinate
+    sigma : f32, // variance of circles
+    v: Vec2 // velocity
 }
 ```
 
