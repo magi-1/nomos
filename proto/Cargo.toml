@@ -27,3 +27,10 @@ path = "ploom/ploom5.rs"
 [[example]]
 name = "ploom6"
 path = "ploom/ploom6.rs"
+
+[[example]]
+name = "trellis_base"
+path = "trellis/base.rs"
+[[example]]
+name = "billiards"
+path = "trellis/billiards.rs"
