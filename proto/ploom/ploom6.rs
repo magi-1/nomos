@@ -8,7 +8,7 @@ const MAX_RADIUS: f32 = 3.0;
 const SCALE: f32 = 20.0;
 
 const DECAY: f32 = 0.99; // variance decay
-const THRESHOLD: f32 = 1.0; // min variance
+const THRESHOLD: f32 = 0.1; // min variance
 
 const PLOOM: f32 = SCALE / 5.0; // or 4.0, or 10
 const DAMPENING: f32 = 0.04;
