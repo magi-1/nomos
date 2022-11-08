@@ -1,10 +1,10 @@
-use nannou::prelude::*;
-use serde::Deserialize;
 use csv::Reader;
 use nalgebra::geometry::{Point3, Rotation3};
+use nannou::prelude::*;
 use nannou_egui::{self, egui, Egui};
-use std::collections::HashMap;
 use rand::Rng;
+use serde::Deserialize;
+use std::collections::HashMap;
 
 const WINDOW_SIZE: u32 = 1200;
 const SCALE: f32 = 0.3;
@@ -14,7 +14,6 @@ const BORB_SPEED: f32 = 0.02;
 const BREAK_COUNT: usize = 10;
 const PITCH_SPEED: f32 = 0.02;
 
-
 struct Node {
     pos: Point3<f32>,
 }
@@ -22,7 +21,7 @@ struct Node {
 impl Node {
     fn fade(&self) -> f32 {
         //(self.pos.z+SPHERE_SIZE/2.0)/(SPHERE_SIZE)
-        0.5 + (self.pos.z-WINDOW_SIZE as f32/2.0)/(WINDOW_SIZE as f32)
+        0.5 + (self.pos.z - WINDOW_SIZE as f32 / 2.0) / (WINDOW_SIZE as f32)
     }
 }
 
@@ -31,7 +30,7 @@ struct Edge {
     src: usize,
     dest: usize,
     hop_count: usize,
-    free: bool
+    free: bool,
 }
 
 struct Borb {
@@ -40,29 +39,26 @@ struct Borb {
     src: usize,
     dest: usize,
     progress: f32,
-    color: (f32, f32, f32)
+    color: (f32, f32, f32),
 }
 
 impl Borb {
-
     fn spawn_random(nodes: &Vec<Node>, neighbors: &Vec<Vec<usize>>) -> Self {
         let src = rand::thread_rng().gen_range(0, nodes.len());
         let options = &neighbors[src];
         let index: usize = rand::thread_rng().gen_range(0, options.len());
         let dest = options[index];
-    
+
         Self {
             pos: nodes[src].pos,
             dest_pos: nodes[dest].pos,
             src: src,
             dest: dest,
             progress: 0.0,
-            color: (1.0, 0.1, 0.1)
+            color: (1.0, 0.1, 0.1),
         }
-
     }
     fn hop(&mut self, nodes: &Vec<Node>, options: &Vec<Vec<usize>>) {
-
         if options[self.dest].len() > 0 {
             self.src = self.dest;
             self.pos = self.dest_pos;
@@ -71,20 +67,20 @@ impl Borb {
             self.dest = dest;
             self.dest_pos = nodes[dest].pos;
             self.progress = 0.0;
-        } 
+        }
     }
 
     fn step(&mut self) {
         self.progress += BORB_SPEED;
-        self.pos = self.pos + self.progress*(self.dest_pos-self.pos);
+        self.pos = self.pos + self.progress * (self.dest_pos - self.pos);
     }
 
     fn fade(&self) -> f32 {
-        0.5 + (self.pos.z-SPHERE_SIZE/2.0)/(SPHERE_SIZE)
+        0.5 + (self.pos.z - SPHERE_SIZE / 2.0) / (SPHERE_SIZE)
     }
 
     fn size(&self) -> f32 {
-        2.0 + 25.0*(self.progress - 0.25).abs()
+        2.0 + 25.0 * (self.progress - 0.25).abs()
     }
 }
 
@@ -95,7 +91,7 @@ fn main() {
 struct Angles {
     roll: f32,
     pitch: f32,
-    yaw: f32
+    yaw: f32,
 }
 struct Model {
     nodes: Vec<Node>,
@@ -107,7 +103,11 @@ struct Model {
 
 impl Model {
     fn new(nodes: Vec<Node>, edges: HashMap<(usize, usize), Edge>) -> Self {
-        let angles = Angles {roll:0.0, pitch:0.0, yaw:0.0};
+        let angles = Angles {
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+        };
         let mut neighbors: Vec<Vec<usize>> = vec![Vec::<usize>::new(); nodes.len()];
         for ((src, dest), _) in edges.iter() {
             neighbors[*src].push(*dest);
@@ -129,14 +129,14 @@ impl Model {
     }
 }
 
-
 fn model(app: &App) -> Model {
-    let window_id = app.new_window()
+    let window_id = app
+        .new_window()
         .size(WINDOW_SIZE, WINDOW_SIZE)
         .view(view)
         .build()
         .unwrap();
-    
+
     let pos_f: String = String::from("beams/graphs/50_node/graph_positions.csv");
     let edge_f: String = String::from("beams/graphs/50_node/graph_edges.csv");
     let (nodes, edges) = read_graph(pos_f, edge_f);
@@ -147,7 +147,6 @@ fn model(app: &App) -> Model {
 }
 
 fn update(_app: &App, model: &mut Model, _update: Update) {
-
     let Model {
         ref mut nodes,
         ref mut edges,
@@ -158,10 +157,10 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
     } = *model;
 
     // Rotating points
-    
+
     let mut broken_edges: Vec<(usize, usize)> = Vec::new();
     for (key, edge) in edges.iter() {
-        if edge.hop_count >= BREAK_COUNT  {
+        if edge.hop_count >= BREAK_COUNT {
             broken_edges.push(*key);
         }
     }
@@ -176,27 +175,35 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
         }
 
         let new_dest = rand::thread_rng().gen_range(0, num_nodes);
-        let new_edge: Edge = Edge {src, dest: new_dest, hop_count: 0, free: true};
+        let new_edge: Edge = Edge {
+            src,
+            dest: new_dest,
+            hop_count: 0,
+            free: true,
+        };
         edges.insert((src, new_dest), new_edge);
         neighbors[src].push(new_dest);
         let new_dest = rand::thread_rng().gen_range(0, num_nodes);
-        let new_edge: Edge = Edge {src: dest, dest: new_dest, hop_count: 0, free: true};
+        let new_edge: Edge = Edge {
+            src: dest,
+            dest: new_dest,
+            hop_count: 0,
+            free: true,
+        };
         edges.insert((dest, new_dest), new_edge);
         neighbors[dest].push(new_dest);
         edges.remove(&(src, dest));
-        
     }
 
-    let r: Rotation3<f32> = Rotation3::from_euler_angles(
-        angles.roll, angles.pitch+PITCH_SPEED, angles.yaw
-    );
+    let r: Rotation3<f32> =
+        Rotation3::from_euler_angles(angles.roll, angles.pitch + PITCH_SPEED, angles.yaw);
 
     for n in nodes.iter_mut() {
-        n.pos = r*n.pos;
+        n.pos = r * n.pos;
     }
     for b in borbs.iter_mut() {
-        b.pos = r*b.pos;
-        b.dest_pos = r*b.dest_pos;
+        b.pos = r * b.pos;
+        b.dest_pos = r * b.dest_pos;
     }
 
     // Step Objects
@@ -210,7 +217,7 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
             if let Some(e) = edges.get_mut(&(borb.dest, borb.src)) {
                 e.hop_count += 1;
             }
-        } 
+        }
     }
 }
 
@@ -222,22 +229,20 @@ fn view(app: &App, model: &Model, frame: Frame) {
 }
 
 fn draw_model(draw: &Draw, model: &Model) {
-   
     // Drawing edges
     for ((src, dest), e) in model.edges.iter() {
         let n1 = &model.nodes[*src];
         let n2 = &model.nodes[*dest];
 
-        let fade: f32 = (n1.fade() + n2.fade())/2.0;
-        let rc = e.hop_count as f32/BREAK_COUNT as f32;
+        let fade: f32 = (n1.fade() + n2.fade()) / 2.0;
+        let rc = e.hop_count as f32 / BREAK_COUNT as f32;
         if !e.free {
             draw.line()
-            .start(vec2(n1.pos.x, n1.pos.y))
-            .end(vec2(n2.pos.x, n2.pos.y))
-            .weight(3.0)
-            .rgba(rc, 0.5-rc, 0.5-rc , fade);
-        } 
-        
+                .start(vec2(n1.pos.x, n1.pos.y))
+                .end(vec2(n2.pos.x, n2.pos.y))
+                .weight(3.0)
+                .rgba(rc, 0.5 - rc, 0.5 - rc, fade);
+        }
     }
 
     for borb in model.borbs.iter() {
@@ -246,8 +251,6 @@ fn draw_model(draw: &Draw, model: &Model) {
             .radius(borb.size())
             .rgba(borb.color.0, borb.color.1, borb.color.2, borb.fade());
     }
-    
-
 }
 
 #[derive(Debug, Deserialize)]
@@ -255,13 +258,13 @@ struct NodeReader {
     id: usize,
     x: f32,
     y: f32,
-    z: f32
+    z: f32,
 }
 
 #[derive(Debug, Deserialize)]
 struct EdgeReader {
     src: usize,
-    dest: usize
+    dest: usize,
 }
 
 fn read_graph(pos_file: String, edge_file: String) -> (Vec<Node>, HashMap<(usize, usize), Edge>) {
@@ -270,15 +273,20 @@ fn read_graph(pos_file: String, edge_file: String) -> (Vec<Node>, HashMap<(usize
     let mut rdr = Reader::from_path(pos_file).unwrap();
     for result in rdr.deserialize() {
         let n: NodeReader = result.unwrap();
-        let node: Node = Node { 
-            pos: SPHERE_SIZE*Point3::new(n.x, n.y, n.z),
+        let node: Node = Node {
+            pos: SPHERE_SIZE * Point3::new(n.x, n.y, n.z),
         };
         nodes.push(node);
     }
     let mut rdr = Reader::from_path(edge_file).unwrap();
     for result in rdr.deserialize() {
         let e: EdgeReader = result.unwrap();
-        let edge: Edge = Edge {src:e.src, dest:e.dest, hop_count: 0, free: false};
+        let edge: Edge = Edge {
+            src: e.src,
+            dest: e.dest,
+            hop_count: 0,
+            free: false,
+        };
         edges.insert((edge.src, edge.dest), edge);
     }
 
