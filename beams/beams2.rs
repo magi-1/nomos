@@ -2,13 +2,10 @@ use nannou::prelude::*;
 use serde::Deserialize;
 use csv::Reader;
 use nalgebra::geometry::{Point3, Rotation3};
-use nalgebra::norm;
-
 use nannou_egui::{self, egui, Egui};
 use std::f32::{consts::PI, self};
 use std::collections::HashMap;
 use rand::Rng;
-use rand::distributions::{Normal, Distribution};
 
 const WINDOW_SIZE: u32 = 1200;
 const SCALE: f32 = 0.3;
@@ -116,12 +113,11 @@ struct Model {
     edges: HashMap<(usize, usize), Edge>,
     borbs: Vec<Borb>,
     angles: Angles,
-    egui: Egui,
     neighbors: Vec<Vec<usize>>,
 }
 
 impl Model {
-    fn new(nodes: Vec<Node>, edges: HashMap<(usize, usize), Edge>, egui: Egui) -> Self {
+    fn new(nodes: Vec<Node>, edges: HashMap<(usize, usize), Edge>) -> Self {
         let angles = Angles {roll:0.0, pitch:0.0, yaw:0.0};
         let mut neighbors: Vec<Vec<usize>> = vec![Vec::<usize>::new(); nodes.len()];
         for ((src, dest), _) in edges.iter() {
@@ -139,7 +135,6 @@ impl Model {
             edges,
             borbs,
             angles,
-            egui, 
             neighbors,
         }
     }
@@ -150,7 +145,6 @@ fn model(app: &App) -> Model {
     let window_id = app.new_window()
         .size(WINDOW_SIZE, WINDOW_SIZE)
         .view(view)
-        .raw_event(raw_window_event)
         .build()
         .unwrap();
     
@@ -160,7 +154,7 @@ fn model(app: &App) -> Model {
 
     let window = app.window(window_id).unwrap();
     let egui = Egui::from_window(&window);
-    Model::new(nodes, edges, egui)
+    Model::new(nodes, edges)
 }
 
 fn update(_app: &App, model: &mut Model, _update: Update) {
@@ -173,21 +167,6 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
         ref mut neighbors,
         ..
     } = *model;
-
-    // // EGUI 
-    // let ctx = model.egui.begin_frame();
-    // let changed_axis = vec![Cell::new(false); 3];
-    // egui::Window::new("Orientation").show(&ctx, |ui| {
-    //     changed_axis[0].set(ui
-    //         .add(egui::Slider::new(&mut angles.roll, -PI..=PI).text("roll"))
-    //         .changed());
-    //     changed_axis[1].set(ui
-    //         .add(egui::Slider::new(&mut angles.pitch, -PI/2.0..=PI/2.0).text("pitch"))
-    //         .changed());
-    //     changed_axis[2].set(ui
-    //         .add(egui::Slider::new(&mut angles.yaw, 0.0..=2.0*PI).text("yaw"))
-    //         .changed());
-    // });
 
     // Rotating points
     
@@ -246,18 +225,6 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
     }
 }
 
-fn captured_frame_path(app: &App, frame: &Frame) -> std::path::PathBuf {
-    // Create a path that we want to save this frame to.
-    app.project_path()
-        .expect("failed to locate `project_path`")
-        // Capture all frames to a directory called `/<path_to_nannou>/nannou/simple_capture`.
-        .join(app.exe_name().unwrap())
-        // Name each file after the number of the frame.
-        .join(format!("{:03}", frame.nth()))
-        // The extension will be PNG. We also support tiff, bmp, gif, jpeg, webp and some others.
-        .with_extension("png")
-}
-
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
     draw.background().rgba(0.0, 0.0, 0.0, 0.75);
@@ -269,18 +236,7 @@ fn view(app: &App, model: &Model, frame: Frame) {
 }
 
 fn draw_model(draw: &Draw, model: &Model) {
-    
-    // Drawing nodes
-    // for node in model.nodes.iter() {
-    //     draw.ellipse()
-    //         .x_y_z(node.pos.x, node.pos.y, node.pos.z)
-    //         .roll(model.angles.roll)
-    //         .pitch(model.angles.pitch)
-    //         .yaw(model.angles.yaw)
-    //         .radius(8.0)
-    //         .rgba(0.10588235, 0.56078431, 0.43921569, node.fade());
-    // }
-    
+   
     // Drawing edges
     for ((src, dest), e) in model.edges.iter() {
         let n1 = &model.nodes[*src];
@@ -308,9 +264,6 @@ fn draw_model(draw: &Draw, model: &Model) {
 
 }
 
-fn raw_window_event(_app: &App, model: &mut Model, event: &nannou::winit::event::WindowEvent) {
-    //model.egui.handle_raw_event(event);
-}
 
 #[derive(Debug, Deserialize)]
 struct NodeReader {
