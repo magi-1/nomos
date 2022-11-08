@@ -18,12 +18,6 @@ const PITCH_SPEED: f32 = 0.02;
 
 // Gui: https://github.com/nannou-org/nannou/blob/master/examples/ui/egui/circle_packing.rs
 
-
-enum BorbMode {
-    RAILS,
-    FREE,
-}
-
 struct Node {
     pos: Point3<f32>,
 }
