@@ -3,7 +3,6 @@ use serde::Deserialize;
 use csv::Reader;
 use nalgebra::geometry::{Point3, Rotation3};
 use nannou_egui::{self, egui, Egui};
-use std::f32::{consts::PI, self};
 use std::collections::HashMap;
 use rand::Rng;
 
@@ -13,10 +12,8 @@ const SPHERE_SIZE: f32 = WINDOW_SIZE as f32 * SCALE;
 const N_BORBS: usize = 150;
 const BORB_SPEED: f32 = 0.02;
 const BREAK_COUNT: usize = 10;
-
 const PITCH_SPEED: f32 = 0.02;
 
-// Gui: https://github.com/nannou-org/nannou/blob/master/examples/ui/egui/circle_packing.rs
 
 struct Node {
     pos: Point3<f32>,
