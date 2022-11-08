@@ -49,7 +49,6 @@ struct Borb {
     src: usize,
     dest: usize,
     progress: f32,
-    mode: BorbMode,
     color: (f32, f32, f32)
 }
 
@@ -67,7 +66,6 @@ impl Borb {
             src: src,
             dest: dest,
             progress: 0.0,
-            mode: BorbMode::RAILS,
             color: (1.0, 0.1, 0.1)
         }
 
@@ -230,9 +228,6 @@ fn view(app: &App, model: &Model, frame: Frame) {
     draw.background().rgba(0.0, 0.0, 0.0, 0.75);
     draw_model(&draw, &model);
     draw.to_frame(app, &frame).unwrap();
-    //model.egui.draw_to_frame(&frame).unwrap();
-    // let file_path = captured_frame_path(app, &frame);
-    // app.main_window().capture_frame(file_path);
 }
 
 fn draw_model(draw: &Draw, model: &Model) {
@@ -263,7 +258,6 @@ fn draw_model(draw: &Draw, model: &Model) {
     
 
 }
-
 
 #[derive(Debug, Deserialize)]
 struct NodeReader {
