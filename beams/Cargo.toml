@@ -1,0 +1,28 @@
+[package]
+name = "beams"
+version = "0.1.0"
+authors = ["magi-1"]
+description = ""
+edition = "2021"
+
+[dependencies]
+nannou = "0.18.0"
+nannou_egui = "0.5.0"
+csv = "1.1"
+rand = "0.6.5"
+serde = "1.0.136"
+serde_derive = "1.0.136"
+nalgebra = "0.16.4"
+hexasphere = "8.0.0"
+
+[[example]]
+name = "b1"
+path = "beams1.rs"
+
+[[example]]
+name = "b2"
+path = "beams2.rs"
+
+[[example]]
+name = "b3"
+path = "beams3.rs"

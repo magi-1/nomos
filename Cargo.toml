@@ -1,6 +1,7 @@
 [workspace]
 members = [
-  "proto"
+  "proto",
+  "beams"
 ]
 
 resolver = "2"
