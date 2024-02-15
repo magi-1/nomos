@@ -3,8 +3,6 @@
 
 A collection of generative art experiments using [nannou](https://nannou.cc/).
 
-The repository structure uses a work space to manage collection generative art pieces.
-
 1. [proto](https://github.com/magi-1/nomos/tree/main/proto)
 2. [beams](https://github.com/magi-1/nomos/tree/main/beams)
 
