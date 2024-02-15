@@ -10,27 +10,27 @@ nannou = "0.18.0"
 rand = "0.6.5"
 
 [[example]]
-name = "ploom1"
-path = "ploom/ploom1.rs"
+name = "ploom_a"
+path = "ploom/a.rs"
 [[example]]
-name = "ploom2"
-path = "ploom/ploom2.rs"
+name = "ploom_b"
+path = "ploom/b.rs"
 [[example]]
-name = "ploom3"
-path = "ploom/ploom3.rs"
+name = "ploom_c"
+path = "ploom/c.rs"
 [[example]]
-name = "ploom4"
-path = "ploom/ploom4.rs"
+name = "ploom_d"
+path = "ploom/d.rs"
 [[example]]
-name = "ploom5"
-path = "ploom/ploom5.rs"
+name = "ploom_e"
+path = "ploom/e.rs"
 [[example]]
-name = "ploom6"
-path = "ploom/ploom6.rs"
+name = "ploom_f"
+path = "ploom/f.rs"
 
 [[example]]
-name = "trellis_base"
-path = "trellis/base.rs"
+name = "trellis_a"
+path = "trellis/a.rs"
 [[example]]
-name = "billiards"
-path = "trellis/billiards.rs"
+name = "trellis_b"
+path = "trellis/b.rs"

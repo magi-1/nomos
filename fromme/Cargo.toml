@@ -1,0 +1,17 @@
+[package]
+name = "fromme"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy = "0.12.1"
+bevy_rapier3d = "0.24.0"
+rand = "0.8.5"
+
+[[example]]
+name = "toyou"
+path = "toyou.rs"
+
+[[example]]
+name = "scratch"
+path = "scratch.rs"

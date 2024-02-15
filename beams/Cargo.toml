@@ -16,13 +16,13 @@ nalgebra = "0.16.4"
 hexasphere = "8.0.0"
 
 [[example]]
-name = "b1"
-path = "beams1.rs"
+name = "dots_a"
+path = "dots/a.rs"
 
 [[example]]
-name = "b2"
-path = "beams2.rs"
+name = "dots_b"
+path = "dots/b.rs"
 
 [[example]]
-name = "b3"
-path = "beams3.rs"
+name = "dots_c"
+path = "dots/c.rs"
